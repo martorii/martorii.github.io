@@ -14,7 +14,7 @@ const Portfolio = () => {
 
   // Mock sentiment analysis
   const analyzeSentiment = (text) => {
-    const positiveWords = ['good', 'great', 'excellent', 'amazing', 'love', 'fantastic', 'awesome', 'wonderful'];
+    const positiveWords = ['good', 'great', 'excellent', 'amazing', 'love', 'fantastic', 'awesome', 'wonderful', 'happy'];
     const negativeWords = ['bad', 'terrible', 'awful', 'hate', 'horrible', 'disappointing', 'worst'];
     
     const words = text.toLowerCase().split(' ');
