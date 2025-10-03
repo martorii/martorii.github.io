@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header.jsx'
+import cv from '../data/cv.pdf';
+import DownloadButton from './DownloadButton.jsx';
+import ContactButton from './ContactButton.jsx';
 import { ChevronDown, Download, Mail, Github, Linkedin, ExternalLink, Brain, Code, MessageSquare, Star, Calendar, ArrowRight } from 'lucide-react';
 
 const Portfolio = () => {
@@ -14,8 +18,8 @@ const Portfolio = () => {
 
   // Mock sentiment analysis
   const analyzeSentiment = (text) => {
-    const positiveWords = ['good', 'great', 'excellent', 'amazing', 'love', 'fantastic', 'awesome', 'wonderful', 'happy'];
-    const negativeWords = ['bad', 'terrible', 'awful', 'hate', 'horrible', 'disappointing', 'worst'];
+    const positiveWords = ['good', 'great', 'excellent', 'amazing', 'love', 'fantastic', 'awesome', 'wonderful', 'happy', 'glad'];
+    const negativeWords = ['bad', 'terrible', 'awful', 'hate', 'horrible', 'disappointing', 'worst', 'sad'];
     
     const words = text.toLowerCase().split(' ');
     let score = 0;
@@ -84,23 +88,7 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-sm z-50 border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              AI Engineer
-            </div>
-            <div className="hidden md:flex space-x-8">
-              {['About', 'Projects', 'Experience', 'Contact'].map(item => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-cyan-400 transition-colors">
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Header/>
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -111,12 +99,12 @@ const Portfolio = () => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            AI Engineer & Researcher
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            AI Engineer & Data Scientist
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-4">
-            Specializing in NLP and Generative Models
+            Specialized in NLP and Generative Models
           </p>
           
           <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
@@ -125,16 +113,8 @@ const Portfolio = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="bg-gradient-to-r from-cyan-500 to-purple-500 px-8 py-4 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
-              <Download size={20} />
-              Download CV
-            </button>
-            <button className="border border-cyan-400 px-8 py-4 rounded-full font-semibold hover:bg-cyan-400 hover:text-black transition-all">
-              Hire Me
-            </button>
-            <a href="#projects" className="text-cyan-400 hover:text-cyan-300 flex items-center gap-2">
-              See My Work <ArrowRight size={16} />
-            </a>
+            <DownloadButton buttonLabel="Download CV" filePath={cv}/>
+            <ContactButton emailTo="erik.martori@gmail.com"/>
           </div>
           
           <div className="mt-16">
@@ -144,6 +124,274 @@ const Portfolio = () => {
             >
               <ChevronDown size={32} className="animate-bounce text-cyan-400" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            About Me
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-semibold mb-6">Who I Am</h3>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                I'm a passionate AI Engineer with 5+ years of experience building and deploying machine learning systems at scale. 
+                My expertise spans from research to production, with a focus on natural language processing and generative AI.
+              </p>
+              
+              <h3 className="text-2xl font-semibold mb-6">What Makes Me Different</h3>
+              <p className="text-gray-300 leading-relaxed">
+                I focus on the business problem and how AI can solve it. I can translate vague questions into measurable objectives.
+                Also, I can thrive in uncertainty, question the status quo, and keep learning, since this field evolves very fast.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl font-semibold mb-6">Core Skills</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  'Natural Language Processing',
+                  'Prompt Engineering',
+                  'Machine Learning',
+                  'Software Engineering',
+                  'MLOps & Deployment',
+                  'Large Language Models',
+                  'Data Engineering',
+                  'Cloud Architecture'
+                ].map(skill => (
+                  <div key={skill} className="bg-white/5 rounded-lg p-3 border border-white/10">
+                    <div className="flex items-center gap-2">
+                      <Code size={16} className="text-cyan-400" />
+                      <span>{skill}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6 bg-black/20">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Shared Liability Identifier",
+                description: "ML Model that predicts shared liability on car accidents",
+                impact: "More efficient claims handling",
+                tech: ["SpaCy", "Foundry", "pyspark"],
+                type: "Production"
+              },
+              {
+                title: "Attribute Extractor",
+                description: "Suggest values for uploaded documents",
+                impact: "Speed up document processing by generating suggestions",
+                tech: ["Llama", "LangChain", "Dataclasses"],
+                type: "Pre-Prod"
+              },
+              {
+                title: "Topic Classifier",
+                description: "Document multi-class classification for user-defined topics",
+                impact: "Automated topic detection",
+                tech: ["pyspark", "TF-IDF", "LightGBM"],
+                type: "Production"
+              }
+            ].map((project, index) => (
+              <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-cyan-400/50 transition-all hover:scale-105">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-xl font-semibold">{project.title}</h3>
+                  <span className="text-xs px-2 py-1 rounded-full bg-cyan-400/20 text-cyan-400">
+                    {project.type}
+                  </span>
+                </div>
+                <p className="text-gray-300 mb-4">{project.description}</p>
+                <p className="text-sm text-cyan-400 mb-4">{project.impact}</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {project.tech.map(tech => (
+                    <span key={tech} className="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* <button className="mt-4 flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
+                  <ExternalLink size={16} />
+                  View Project
+                </button> */}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Showcase */}
+      <section id="showcase" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Interactive AI Demos
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-30">
+            {/* AI Assistant Chat */}
+            {/* <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <MessageSquare className="text-cyan-400" />
+                Portfolio AI Assistant
+              </h3>
+              <div className="bg-black/30 rounded-lg p-4 h-48 overflow-y-auto mb-4">
+                {chatMessages.map((msg, index) => (
+                  <div key={index} className={`mb-3 ${msg.type === 'user' ? 'text-right' : ''}`}>
+                    <div className={`inline-block p-2 rounded-lg max-w-[90%] text-sm ${
+                      msg.type === 'user' 
+                        ? 'bg-cyan-500 text-white' 
+                        : 'bg-gray-700 text-gray-100'
+                    }`}>
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleChatSubmit(e)}
+                  placeholder="Ask about experience..."
+                  className="flex-1 bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-gray-400 text-sm"
+                />
+                <button onClick={handleChatSubmit} className="bg-cyan-500 px-3 py-2 rounded-lg hover:bg-cyan-600 transition-colors text-sm">
+                  Send
+                </button>
+              </div>
+            </div> */}
+
+            {/* Sentiment Analyzer */}
+            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Brain className="text-purple-400" />
+                Sentiment Analysis
+              </h3>
+              <div className="space-y-4">
+                <textarea
+                  value={sentimentText}
+                  onChange={(e) => setSentimentText(e.target.value)}
+                  placeholder="Type something to analyze..."
+                  className="w-full bg-black/30 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 h-32 resize-none text-sm"
+                />
+                <button
+                  onClick={handleSentimentAnalysis}
+                  className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors w-full text-sm"
+                >
+                  Analyze Sentiment
+                </button>
+                {sentimentResult && (
+                  <div className="bg-black/30 rounded-lg p-3">
+                    <div className={`font-semibold ${sentimentResult.color}`}>
+                      {sentimentResult.sentiment}
+                    </div>
+                    <div className="text-xs text-gray-400">
+                      Confidence: {(sentimentResult.confidence * 100).toFixed(1)}%
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* AI Joke Generator */}
+            <div className="bg-white/5 rounded-xl p-6 border border-white/10 h-[320px]">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Star className="text-yellow-400" />
+                AI Joke Generator
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-black/30 rounded-lg p-4 h-32 flex items-center justify-center">
+                  {isLoadingJoke ? (
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <div className="animate-spin w-4 h-4 border-2 border-yellow-400 border-t-transparent rounded-full"></div>
+                      Generating joke...
+                    </div>
+                  ) : currentJoke ? (
+                    <p className="text-sm text-gray-100 text-center leading-relaxed">{currentJoke}</p>
+                  ) : (
+                    <p className="text-gray-400 text-sm text-center">Click below to generate an AI-themed joke!</p>
+                  )}
+                </div>
+                <button
+                  onClick={generateJoke}
+                  disabled={isLoadingJoke}
+                  className="bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors w-full text-sm disabled:opacity-50"
+                >
+                  {isLoadingJoke ? 'Generating...' : 'Tell me a joke!'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Timeline */}
+      <section id="experience" className="py-20 px-6 bg-black/20">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Experience & Timeline
+          </h2>
+          
+          <div className="space-y-8">
+            {[
+              {
+                year: "2023-Present",
+                title: "(Senior) Data Scientist",
+                company: "Munich Re",
+                description: "Leading (Generative) AI initiatives to improve claims handling and raise AI awareness"
+              },
+              {
+                year: "2021-2023",
+                title: "Data Scientist Consultant",
+                company: "metafinanz",
+                description: "Crafted ML models to generate value for our clients"
+              },
+              {
+                year: "2019-2021",
+                title: "Master's in Mathematics",
+                company: "Technische Universität München (TUM)",
+                description: "Focus on Machine Learning, Deep Learning, and Data Science"
+              },
+              {
+                year: "2017-2019",
+                title: "Software Engineer Freelancer",
+                company: "proceedit",
+                description: "Developed internal solution in C#, HTML, and javscript"
+              },
+              {
+                year: "2012-2018",
+                title: "Double Bachelor's in Physics and Mathematics",
+                company: "Universitat de Barcelona",
+                description: "Belonged to the top-250 best students in Catalonia"
+              }
+            ].map((item, index) => (
+              <div key={index} className="flex gap-6">
+                <div className="flex flex-col items-center">
+                  <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
+                  {<div className="w-px h-16 bg-gray-600 mt-2"></div>}
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm text-cyan-400 mb-1">{item.year}</div>
+                  <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
+                  <div className="text-purple-400 mb-2">{item.company}</div>
+                  <p className="text-gray-300">{item.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -230,262 +478,6 @@ const Portfolio = () => {
                 </span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Who I Am</h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                I'm a passionate AI Engineer with 5+ years of experience building and deploying machine learning systems at scale. 
-                My expertise spans from research to production, with a focus on natural language processing and generative AI.
-              </p>
-              
-              <h3 className="text-2xl font-semibold mb-6">What Makes Me Different</h3>
-              <p className="text-gray-300 leading-relaxed">
-                I bridge the gap between cutting-edge research and practical implementation. With both academic publications 
-                and production systems under my belt, I bring a unique perspective to AI challenges.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Core Skills</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  'LLM Fine-tuning',
-                  'Computer Vision',
-                  'Reinforcement Learning',
-                  'Deep Learning',
-                  'MLOps & Deployment',
-                  'Research & Development',
-                  'Data Engineering',
-                  'Cloud Architecture'
-                ].map(skill => (
-                  <div key={skill} className="bg-white/5 rounded-lg p-4 border border-white/10">
-                    <div className="flex items-center gap-2">
-                      <Code size={16} className="text-cyan-400" />
-                      <span>{skill}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-black/20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Featured Projects
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Multi-Modal LLM Platform",
-                description: "Built a production system processing 10M+ requests/day",
-                impact: "40% improvement in accuracy over baseline",
-                tech: ["PyTorch", "Transformers", "AWS"],
-                type: "Production"
-              },
-              {
-                title: "Neural Code Generator",
-                description: "Research project on automated code generation",
-                impact: "Published in top-tier conference",
-                tech: ["GPT", "AST", "Python"],
-                type: "Research"
-              },
-              {
-                title: "AI Art Generator",
-                description: "Creative project combining GANs with style transfer",
-                impact: "10k+ users, featured in tech blogs",
-                tech: ["StyleGAN", "React", "Firebase"],
-                type: "Creative"
-              }
-            ].map((project, index) => (
-              <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-cyan-400/50 transition-all hover:scale-105">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                  <span className="text-xs px-2 py-1 rounded-full bg-cyan-400/20 text-cyan-400">
-                    {project.type}
-                  </span>
-                </div>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-                <p className="text-sm text-cyan-400 mb-4">{project.impact}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map(tech => (
-                    <span key={tech} className="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-300">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <button className="mt-4 flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
-                  <ExternalLink size={16} />
-                  View Project
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Showcase */}
-      <section id="showcase" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Interactive AI Demos
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* AI Assistant Chat */}
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <MessageSquare className="text-cyan-400" />
-                Portfolio AI Assistant
-              </h3>
-              <div className="bg-black/30 rounded-lg p-4 h-48 overflow-y-auto mb-4">
-                {chatMessages.map((msg, index) => (
-                  <div key={index} className={`mb-3 ${msg.type === 'user' ? 'text-right' : ''}`}>
-                    <div className={`inline-block p-2 rounded-lg max-w-[90%] text-sm ${
-                      msg.type === 'user' 
-                        ? 'bg-cyan-500 text-white' 
-                        : 'bg-gray-700 text-gray-100'
-                    }`}>
-                      {msg.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleChatSubmit(e)}
-                  placeholder="Ask about experience..."
-                  className="flex-1 bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-gray-400 text-sm"
-                />
-                <button onClick={handleChatSubmit} className="bg-cyan-500 px-3 py-2 rounded-lg hover:bg-cyan-600 transition-colors text-sm">
-                  Send
-                </button>
-              </div>
-            </div>
-
-            {/* Sentiment Analyzer */}
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Brain className="text-purple-400" />
-                Sentiment Analysis
-              </h3>
-              <div className="space-y-4">
-                <textarea
-                  value={sentimentText}
-                  onChange={(e) => setSentimentText(e.target.value)}
-                  placeholder="Type something to analyze..."
-                  className="w-full bg-black/30 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 h-20 resize-none text-sm"
-                />
-                <button
-                  onClick={handleSentimentAnalysis}
-                  className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors w-full text-sm"
-                >
-                  Analyze Sentiment
-                </button>
-                {sentimentResult && (
-                  <div className="bg-black/30 rounded-lg p-3">
-                    <div className={`font-semibold ${sentimentResult.color}`}>
-                      {sentimentResult.sentiment}
-                    </div>
-                    <div className="text-xs text-gray-400">
-                      Confidence: {(sentimentResult.confidence * 100).toFixed(1)}%
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* AI Joke Generator */}
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Star className="text-yellow-400" />
-                AI Joke Generator
-              </h3>
-              <div className="space-y-4">
-                <div className="bg-black/30 rounded-lg p-4 h-32 flex items-center justify-center">
-                  {isLoadingJoke ? (
-                    <div className="flex items-center gap-2 text-gray-400">
-                      <div className="animate-spin w-4 h-4 border-2 border-yellow-400 border-t-transparent rounded-full"></div>
-                      Generating joke...
-                    </div>
-                  ) : currentJoke ? (
-                    <p className="text-sm text-gray-100 text-center leading-relaxed">{currentJoke}</p>
-                  ) : (
-                    <p className="text-gray-400 text-sm text-center">Click below to generate an AI-themed joke!</p>
-                  )}
-                </div>
-                <button
-                  onClick={generateJoke}
-                  disabled={isLoadingJoke}
-                  className="bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors w-full text-sm disabled:opacity-50"
-                >
-                  {isLoadingJoke ? 'Generating...' : 'Tell me a joke!'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Timeline */}
-      <section id="experience" className="py-20 px-6 bg-black/20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Experience & Timeline
-          </h2>
-          
-          <div className="space-y-8">
-            {[
-              {
-                year: "2023-Present",
-                title: "Senior AI Engineer",
-                company: "Tech Startup",
-                description: "Leading AI initiatives, built scalable ML pipelines processing millions of requests daily."
-              },
-              {
-                year: "2021-2023",
-                title: "AI Research Scientist",
-                company: "Research Lab",
-                description: "Published 3 papers on generative models, developed novel architectures for NLP tasks."
-              },
-              {
-                year: "2019-2021",
-                title: "ML Engineer",
-                company: "Fortune 500",
-                description: "Deployed computer vision models to production, reduced inference time by 60%."
-              }
-            ].map((item, index) => (
-              <div key={index} className="flex gap-6">
-                <div className="flex flex-col items-center">
-                  <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
-                  {index < 2 && <div className="w-px h-16 bg-gray-600 mt-2"></div>}
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm text-cyan-400 mb-1">{item.year}</div>
-                  <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                  <div className="text-purple-400 mb-2">{item.company}</div>
-                  <p className="text-gray-300">{item.description}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
