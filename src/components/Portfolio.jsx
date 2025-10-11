@@ -3,7 +3,7 @@ import Header from './Header.jsx'
 import cv from '../data/cv.pdf';
 import DownloadButton from './DownloadButton.jsx';
 import ContactButton from './ContactButton.jsx';
-import { ChevronDown, Download, Mail, Github, Linkedin, ExternalLink, Brain, Code, MessageSquare, Star, Calendar, ArrowRight } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Brain, Code, Star } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -370,7 +370,7 @@ const Portfolio = () => {
                 year: "2017-2019",
                 title: "Software Engineer Freelancer",
                 company: "proceedit",
-                description: "Developed internal solution in C#, HTML, and javscript"
+                description: "Developed internal solution in C#, HTML, and javascript"
               },
               {
                 year: "2012-2018",
@@ -397,7 +397,7 @@ const Portfolio = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-6">
+      {/* <section id="testimonials" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             What Others Say
@@ -480,7 +480,7 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6">
@@ -493,26 +493,17 @@ const Portfolio = () => {
             Ready to bring AI innovation to your team? Let's discuss how I can help solve your challenges.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <button className="bg-gradient-to-r from-cyan-500 to-purple-500 px-8 py-4 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
-              <Mail size={20} />
-              Get In Touch
-            </button>
-            <button className="border border-cyan-400 px-8 py-4 rounded-full font-semibold hover:bg-cyan-400 hover:text-black transition-all flex items-center gap-2">
-              <Calendar size={20} />
-              Schedule Call
-            </button>
-          </div>
-          
           <div className="flex justify-center gap-8">
             {[
-              { icon: <Github size={24} />, label: "GitHub", href: "#" },
-              { icon: <Linkedin size={24} />, label: "LinkedIn", href: "#" },
-              { icon: <Mail size={24} />, label: "Email", href: "#" }
+              { icon: <Github size={24} />, label: "GitHub", href: "https://github.com/martorii" },
+              { icon: <Linkedin size={24} />, label: "LinkedIn", href: "https://linkedin.com/in/erik-martori-lopez" },
+              { icon: <img src="src/assets/icons/kaggle.svg" alt="" className="w-6 h-6" />, label: "Kaggle", href: "https://www.kaggle.com/erikmartorilpez" }
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 {item.icon}
@@ -526,7 +517,7 @@ const Portfolio = () => {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center text-gray-400">
-          <p>© 2024 AI Engineer Portfolio. Built with React and passion for AI.</p>
+          <p>© 2024 AI Engineer Portfolio. Vibe coded with React and passion for AI.</p>
         </div>
       </footer>
     </div>
